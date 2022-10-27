@@ -11,19 +11,15 @@ function App() {
     { id: 2, title: "Python", body: "Description" },
     { id: 3, title: "C++", body: "Description" },
   ])
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+  const [post, setPost] = useState({ title: '', body: '' })
+  console.log(post);
 
 
   const addNewPost = (e) => {
     e.preventDefault()
 
-    const newPost = {
-      id: Date.now(),
-      body,
-      title
-    }
-    setPosts([...posts, newPost])
+    setPosts([...posts, { ...post, id: Date.now() }])
+    setPost({ title: '', body: '' })
   }
 
   return (
@@ -33,11 +29,11 @@ function App() {
         <Input
           type="text"
           placeholder="title of post"
-          value={title}
-          onChange={e => setTitle(e.target.value)} />
+          value={post.title}
+          onChange={e => setPost({ ...post, title: e.target.value })} />
         <Input
-          value={body}
-          onChange={e => setBody(e.target.value)}
+          value={post.body}
+          onChange={e => setPost({ ...post, body: e.target.value })}
           type="text"
           placeholder="description of post"
         />
