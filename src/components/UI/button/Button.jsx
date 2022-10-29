@@ -1,12 +1,26 @@
-import React from 'react'
-import classes from "./Button.module.css"
+import React, { useEffect, useState } from 'react'
+import classes from './Button.module.css'
 
-const Button = ({ children, ...props }) => {
+const Button = (props) => {
+  const [count, setCount] = useState(0)
+  const click = () => {
+    setCount(count + 1)
+    if (count === 30) {
+
+      setCount(count - count)
+    }
+  }
+  useEffect(() => {
+    document.title = `Вы нажали ${count} раз`
+  })
   return (
-    <button className={classes.Btn} {...props}>
-      {children}
-    </button>
+    <button className={classes.btn}
+      onClick={click}>{props.btn}{count}</button>
   )
+}
+
+Button.defaultProps = {
+  btn: "Button"
 }
 
 export default Button
